@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "pwui": "playwright test --ui",
+    "pwdebug": "playwright test --debug"
   },
   "name": "playwright-playground",
   "version": "1.0.0",
