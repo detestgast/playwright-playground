@@ -2,7 +2,13 @@
   "semi": true,
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 100,
+  "printWidth": 120,
   "tabWidth": 2,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["tests/**/*.ts", "specs/**/*.ts", "pages/**/*.ts"],
+      "options": { "printWidth": 140 }
+    }
+  ]
 }
