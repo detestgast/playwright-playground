@@ -2,6 +2,7 @@ import { Page, Locator } from '@playwright/test';
 import { BasePage } from './base-page';
 
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
+  readonly mainContent: Locator;
   readonly verzekeringSamenstellenBtn: Locator;
   readonly persoonsgegevensBtn: Locator;
   readonly gezondheidsvragenBtn: Locator;
@@ -13,6 +14,8 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     super(page);
 
     // Locators
+    this.mainContent = this.page.getByRole('main');
+
     this.verzekeringSamenstellenBtn = this.page.getByRole('button', { name: /Verzekering samenstellen/i });
     this.persoonsgegevensBtn = this.page.getByRole('button', { name: /Persoonsgegevens/i });
     this.gezondheidsvragenBtn = this.page.getByRole('button', { name: /Gezondheidsvragen/i });
