@@ -13,6 +13,9 @@ test.describe('DELA uitvaartverzekering afsluiten', () => {
     });
 
     await uitvaartverzekeringAfsluitenPage.selectInsuranceOption('geldverzekering');
+    await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
+      name: 'insurance-premium-calculation-step1-choose-amount.aria.yml',
+    });
 
     await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
   });

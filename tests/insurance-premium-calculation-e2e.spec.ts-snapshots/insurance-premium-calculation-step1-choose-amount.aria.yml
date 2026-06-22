@@ -1,0 +1,77 @@
+- main:
+  - button "Stap 1 Verzekering Samenstellen": Verzekering samenstellen
+  - button "Stap 2 Persoonsgegevens" [disabled]
+  - button "Stap 3 Gezondheidsvragen" [disabled]
+  - button "Stap 4 Betaalgegevens" [disabled]
+  - paragraph: Geboortedatum
+  - paragraph: /\d+-\d+-\d+/
+  - button "Wijzig"
+  - paragraph: Geselecteerde verzekering
+  - paragraph: Geldverzekering
+  - button "Wijzig"
+  - heading "Verzekerd geldbedrag" [level=2]
+  - group "Kies het bedrag dat je wilt verzekeren. Bij ons wordt dit bedrag altijd volledig uitgekeerd.":
+    - text: ""
+    - radio /Gemiddeld € \d+\.\d+/
+    - text: /Gemiddeld € \d+\.\d+/
+    - radio /Kies zelf een bedrag \(minimaal € \d+\) €/
+    - text: /Kies zelf een bedrag \(minimaal € \d+\) €/
+    - textbox /Invoerveld voor Kies zelf een bedrag \(minimaal € \d+\)/:
+      - /placeholder: "800"
+    - text: Dit bedrag kun je later in Mijn DELA nog aanpassen.
+  - link "Bekijk de toelichting over het aanvullend geldbedrag":
+    - /url: /verzekeringen/uitvaartverzekering/uitvaartverzekering-afsluiten#
+    - text: Bekijk toelichting
+  - button "Ga verder"
+  - paragraph: Stap 3 - Bepaal de betaalduur en -termijn
+  - heading "Kosten" [level=2]
+  - heading "Premie per persoon" [level=3]
+  - paragraph: Verzekerde
+  - paragraph: /\d+-\d+-\d+/
+  - paragraph: /€ \d+,\d+/
+  - heading "Premie per maand" [level=2]
+  - paragraph: €
+  - paragraph: /\d+,/
+  - paragraph: /\d+/
+  - separator
+  - heading "Afsluitkosten" [level=2]
+  - button "Meer informatie over de distributiekosten"
+  - paragraph: Distributiekosten
+  - paragraph: /€ \d+,\d+/
+  - button "Meer informatie over de poliskosten"
+  - paragraph: Poliskosten
+  - paragraph: /€ \d+,\d+/
+  - img /gemiddelde beoordeling is \d+ van de \d+ sterren op basis van \d+ ervaringen/
+  - text: /Klanten beoordelen ons met een \d+\.\d+/
+  - link "Bekijk alle klantervaringen":
+    - /url: /uitvaart/voor-de-uitvaart/ervaringen-van-klanten
+  - heading "Belangrijke informatie" [level=2]
+  - paragraph:
+    - link "Algemene voorwaarden":
+      - /url: /.*\.pdf$/
+  - paragraph:
+    - button "Hoeveel moet ik verzekeren"
+  - paragraph:
+    - link "Brochure":
+      - /url: /.*\.pdf$/
+  - paragraph:
+    - link "Productleeswijzer":
+      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup/d220-w0426-rgb-productleeswijzer-dup-model-4-1
+  - paragraph:
+    - link "Vergelijkingskaart":
+      - /url: /.*\.pdf$/
+  - paragraph:
+    - link "Verzekeringskaart diensten":
+      - /url: https://verzekeringskaarten.nl/dela/uitvaartverzekering
+  - paragraph:
+    - link "Verzekeringskaart geld":
+      - /url: https://verzekeringskaarten.nl/dela/Uitvaartverzekering-geld
+  - link "Keurmerk Uitvaartzorg":
+    - /url: /verzekeringen/keurmerken/keurmerk-uitvaartzorg
+  - link "Keurmerk Privacy Waarborg":
+    - /url: /verzekeringen/keurmerken/keurmerk-privacy-waarborg
+    - img "Keurmerk Uitvaartzorg"
+  - link "GreenLeave":
+    - /url: /uitvaart/voor-de-uitvaart/duurzame-uitvaart/kernprincipes
+    - img "GreenLeave"
+  - paragraph: /Kosteloos annuleren binnen \d+ dagen/

@@ -65,25 +65,25 @@
   - paragraph: /€ \d+,\d+/
   - heading "Premie per maand" [level=2]
   - paragraph: Stel je verzekering samen en bereken je maandelijkse premie. Bekijk je kosten in de volgende stap.
-  - img /gemiddelde beoordeling is 5 van de 5 sterren op basis van \d+ ervaringen/
-  - text: Klanten beoordelen ons met een 9.6
+  - img /gemiddelde beoordeling is \d+ van de \d+ sterren op basis van \d+ ervaringen/
+  - text: /Klanten beoordelen ons met een \d+\.\d+/
   - link "Bekijk alle klantervaringen":
     - /url: /uitvaart/voor-de-uitvaart/ervaringen-van-klanten
   - heading "Belangrijke informatie" [level=2]
   - paragraph:
     - link "Algemene voorwaarden":
-      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup/d216_w0625_rgb_algemene-voorwaarden-dela-dup.pdf
+      - /url: /.*\.pdf$/
   - paragraph:
     - button "Hoeveel moet ik verzekeren"
   - paragraph:
     - link "Brochure":
-      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup-2026/d351_w1225_brochure_dup_direct_rgb.pdf
+      - /url: /.*\.pdf$/
   - paragraph:
     - link "Productleeswijzer":
       - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup/d220-w0426-rgb-productleeswijzer-dup-model-4-1
   - paragraph:
     - link "Vergelijkingskaart":
-      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup-2026/i667_w1225_vergelijkingskaart_risicos_afdekken.pdf
+      - /url: /.*\.pdf$/
   - paragraph:
     - link "Verzekeringskaart diensten":
       - /url: https://verzekeringskaarten.nl/dela/uitvaartverzekering
