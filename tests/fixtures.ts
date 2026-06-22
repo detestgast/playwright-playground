@@ -1,14 +1,14 @@
-import { test as base, type Page } from '@playwright/test';
-import { BasePage } from '../pages/base-page';
+import { test as base } from '@playwright/test';
+import { UitvaartverzekeringAfsluitenPage } from '../pages/uitvaartverzekering-afsluiten-page';
 
-type Fixtures = {
-  basePage: BasePage;
+type DelaFixtures = {
+  uitvaartverzekeringAfsluitenPage: UitvaartverzekeringAfsluitenPage;
 };
 
-export const test = base.extend<Fixtures>({
-  basePage: async ({ page }, use) => {
-    const basePage = new BasePage(page);
-    await use(basePage);
+export const test = base.extend<DelaFixtures>({
+  uitvaartverzekeringAfsluitenPage: async ({ page }, use) => {
+    const uitvaartverzekeringAfsluitenPage = new UitvaartverzekeringAfsluitenPage(page);
+    await use(uitvaartverzekeringAfsluitenPage);
   },
 });
 
