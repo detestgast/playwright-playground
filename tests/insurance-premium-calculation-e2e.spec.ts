@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures';
+import { test, expect } from '../src/fixtures/fixtures';
 
 test.describe('DELA uitvaartverzekering afsluiten', () => {
   test('should perform a premium calculation', async ({ uitvaartverzekeringAfsluitenPage }) => {
@@ -11,5 +11,9 @@ test.describe('DELA uitvaartverzekering afsluiten', () => {
     await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
       name: 'insurance-premium-calculation-step1-choose-insurance.aria.yml',
     });
+
+    await uitvaartverzekeringAfsluitenPage.selectInsuranceOption('geldverzekering');
+
+    await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
   });
 });

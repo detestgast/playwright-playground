@@ -18,4 +18,8 @@ export class BasePage {
       await this.acceptAllCookiesBtn.click();
     }
   }
+
+  async waitForTimeout(timeout: number) {
+    await this.page.waitForTimeout(timeout);
+  }
 }
