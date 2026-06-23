@@ -1,0 +1,25 @@
+import { INSURANCE_OPTIONS } from '../../src/consts/insurance-options';
+import { InsuranceOptions } from '../../src/types/insuranceOptions';
+import { Persona } from '../../src/types/persona';
+
+export const adultMale = {
+  firstName: 'Jan',
+  lastName: 'Zwart',
+  dateOfBirth: new Date('1976-11-16'),
+  gender: 'male',
+  insuranceOptions: {
+    insuranceType: INSURANCE_OPTIONS.MONEY,
+    insuredAmount: 15000,
+  },
+} satisfies Persona & InsuranceOptions;
+
+export const adultFemale = {
+  firstName: 'Anna',
+  lastName: 'Jansen',
+  dateOfBirth: new Date('1988-09-13'),
+  gender: 'female',
+  insuranceOptions: {
+    insuranceType: INSURANCE_OPTIONS.SERVICE,
+    additionalAmount: 2000,
+  },
+} satisfies Persona & InsuranceOptions;
