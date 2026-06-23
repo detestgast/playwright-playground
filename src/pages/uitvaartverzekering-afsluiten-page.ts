@@ -1,9 +1,11 @@
 import { BasePage } from './base-page';
 import { Page, Locator } from '@playwright/test';
 import { INSURANCE_OPTIONS } from '../consts/insurance-options';
+import { InsuranceOptions } from '../types/insuranceOptions';
 
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly betaalgegevensBtn: Locator;
+  readonly chooseOwnedAmountInput: Locator;
   readonly dobInput: Locator;
   readonly gaVerderBtn: Locator;
   readonly gezondheidsvragenBtn: Locator;
@@ -11,32 +13,30 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly insuranceRadioOptions: Locator;
   readonly mainContent: Locator;
   readonly persoonsgegevensBtn: Locator;
-  readonly verzekeringSamenstellenBtn: Locator;
   readonly selecteerDienstenverzekeringBtn: Locator;
   readonly selecteerGeldverzekeringBtn: Locator;
+  readonly verzekeringSamenstellenBtn: Locator;
 
   constructor(page: Page) {
     super(page);
 
     // Locators
-    this.mainContent = this.page.getByRole('main');
-
-    this.verzekeringSamenstellenBtn = this.page.getByRole('button', { name: /Verzekering samenstellen/i });
-    this.persoonsgegevensBtn = this.page.getByRole('button', { name: /Persoonsgegevens/i });
-    this.gezondheidsvragenBtn = this.page.getByRole('button', { name: /Gezondheidsvragen/i });
     this.betaalgegevensBtn = this.page.getByRole('button', { name: /Betaalgegevens/i });
+    this.chooseOwnedAmountInput = this.page.getByRole('textbox', { name: /Kies zelf een bedrag/i });
+    this.dobInput = this.page.getByRole('textbox', { name: 'Geboortedatum' });
+    this.gaVerderBtn = this.page.getByRole('button', { name: /Ga verder/i });
+    this.gezondheidsvragenBtn = this.page.getByRole('button', { name: /Gezondheidsvragen/i });
+    this.insuranceRadioGroup = this.page.getByRole('radiogroup');
+    this.insuranceRadioOptions = this.insuranceRadioGroup.getByRole('radio');
+    this.mainContent = this.page.getByRole('main');
+    this.persoonsgegevensBtn = this.page.getByRole('button', { name: /Persoonsgegevens/i });
     this.selecteerDienstenverzekeringBtn = this.page.getByRole('button', {
       name: /Selecteer dienstenverzekering en ga verder/i,
     });
     this.selecteerGeldverzekeringBtn = this.page.getByRole('button', {
       name: /Selecteer geldverzekering en ga verder/i,
     });
-
-    this.dobInput = this.page.getByRole('textbox', { name: 'Geboortedatum' });
-    this.gaVerderBtn = this.page.getByRole('button', { name: /Ga verder/i });
-
-    this.insuranceRadioGroup = this.page.getByRole('radiogroup');
-    this.insuranceRadioOptions = this.insuranceRadioGroup.getByRole('radio');
+    this.verzekeringSamenstellenBtn = this.page.getByRole('button', { name: /Verzekering samenstellen/i });
   }
 
   /**
@@ -49,10 +49,15 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
 
   /**
    * Enter the date of birth and click the 'Ga verder' button.
-   * @param geboortedatum The date of birth to enter.
+   * @param geboortedatum The Date of birth to enter.
    */
-  async enterGeboortedatumAndContinue(geboortedatum: string) {
-    await this.dobInput.fill(geboortedatum);
+  async enterGeboortedatumAndContinue(geboortedatum: Date) {
+    const formattedDate = geboortedatum.toLocaleDateString('nl-NL', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+    await this.dobInput.fill(formattedDate);
     await this.gaVerderBtn.click();
   }
 
@@ -72,7 +77,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await this.betaalgegevensBtn.click();
   }
 
-  async selectInsuranceOption(option: (typeof INSURANCE_OPTIONS)[keyof typeof INSURANCE_OPTIONS]) {
+  async selectInsuranceOption(option: InsuranceOptions['insuranceOptions']['insuranceType']) {
     await this.insuranceRadioGroup.waitFor({ state: 'visible' });
     switch (option) {
       case INSURANCE_OPTIONS.SERVICE:
@@ -83,6 +88,19 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
         break;
       default:
         throw new Error(`Unknown insurance option: ${option}`);
+    }
+  }
+
+  async selectAmountOrAdditionalAmount(scenario: InsuranceOptions) {
+    if (scenario.insuranceOptions.insuredAmount) {
+      const insuredAmountInput = this.page.getByRole('textbox', {
+        name: /Invoerveld voor Kies zelf een bedrag/i,
+      });
+      await insuredAmountInput.fill(scenario.insuranceOptions.insuredAmount.toString());
+    }
+
+    if (scenario.insuranceOptions.additionalAmount) {
+      await this.chooseOwnedAmountInput.fill(scenario.insuranceOptions.additionalAmount.toString());
     }
   }
 }
