@@ -1,10 +1,10 @@
-import { BasePage } from './base-page';
 import { Page, Locator } from '@playwright/test';
+import { DURATION } from '../consts/durations';
 import { INSURANCE_TYPE } from '../consts/insuranceTypes';
+import { PAYMENT_FREQUENCY } from '../consts/paymentFrequencies';
 import { InsuranceOptions } from '../types/insuranceOptions';
 import { formatDate } from '../utils/date';
-import { DURATION } from '../consts/durations';
-import { PAYMENT_FREQUENCY } from '../consts/paymentFrequencies';
+import { BasePage } from './base-page';
 
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly betaalgegevensBtn: Locator;

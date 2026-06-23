@@ -1,7 +1,7 @@
 import { test as base } from '@playwright/test';
-import { UitvaartverzekeringAfsluitenPage } from '../pages/uitvaartverzekering-afsluiten-page';
 import * as allure from 'allure-js-commons';
 import fs from 'fs';
+import { UitvaartverzekeringAfsluitenPage } from '../pages/uitvaartverzekering-afsluiten-page';
 
 type DelaFixtures = {
   uitvaartverzekeringAfsluitenPage: UitvaartverzekeringAfsluitenPage;

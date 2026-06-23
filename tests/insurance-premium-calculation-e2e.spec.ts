@@ -1,7 +1,7 @@
-import { test, expect } from '../src/fixtures/fixtures';
 import * as allure from 'allure-js-commons';
-import { adultFemale, adultMale } from './scenarios/funaral-insurance-adult';
+import { test, expect } from '../src/fixtures/fixtures';
 import { formatDate } from '../src/utils/date';
+import { adultFemale, adultMale } from './scenarios/funaral-insurance-adult';
 
 test.describe('DELA uitvaartverzekering', () => {
   const testScenarios = [{ scenario: adultMale }, { scenario: adultFemale }];
