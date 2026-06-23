@@ -1,10 +1,14 @@
-import { INSURANCE_OPTIONS } from '../consts/insurance-options';
+import { INSURANCE_TYPE } from '../consts/insurance_types';
+import { DURATION } from '../consts/durations';
 
-export type InsuranceOptionValue = (typeof INSURANCE_OPTIONS)[keyof typeof INSURANCE_OPTIONS];
+type InsuranceType = (typeof INSURANCE_TYPE)[keyof typeof INSURANCE_TYPE];
+type DurationType = (typeof DURATION)[keyof typeof DURATION];
+
 export type InsuranceOptions = {
   insuranceOptions: {
-    insuranceType: InsuranceOptionValue;
+    insuranceType: InsuranceType;
     insuredAmount?: number;
     additionalAmount?: number;
+    duration: DurationType;
   };
 };
