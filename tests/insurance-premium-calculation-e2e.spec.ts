@@ -1,6 +1,6 @@
 import { test, expect } from '../src/fixtures/fixtures';
 import * as allure from 'allure-js-commons';
-import { adultFemale, adultMale } from './scenarios/adult-happy-flow';
+import { adultFemale, adultMale } from './scenarios/funaral-insurance-adult';
 import { formatDate } from '../src/utils/date';
 
 test.describe('DELA uitvaartverzekering', () => {
@@ -17,7 +17,8 @@ test.describe('DELA uitvaartverzekering', () => {
         });
 
         await allure.step(`Enter date of birth ${formatDate(scenario.dateOfBirth)} and continue`, async () => {
-          await uitvaartverzekeringAfsluitenPage.enterGeboortedatumAndContinue(scenario.dateOfBirth);
+          await uitvaartverzekeringAfsluitenPage.enterGeboortedatum(scenario.dateOfBirth);
+          await uitvaartverzekeringAfsluitenPage.continueToNextStep();
           await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
             name: 'insurance-premium-calculation-step1-choose-insurance.aria.yml',
           });
@@ -26,6 +27,8 @@ test.describe('DELA uitvaartverzekering', () => {
         await allure.step(`Select insurance type ${scenario.insuranceOptions.insuranceType}`, async () => {
           await uitvaartverzekeringAfsluitenPage.selectInsuranceOption(scenario.insuranceOptions.insuranceType);
           await uitvaartverzekeringAfsluitenPage.selectAmountOrAdditionalAmount(scenario);
+          await uitvaartverzekeringAfsluitenPage.continueToNextStep();
+          await uitvaartverzekeringAfsluitenPage.selectDuration(scenario.insuranceOptions.duration);
         });
 
         await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);

@@ -1,12 +1,13 @@
 import { BasePage } from './base-page';
 import { Page, Locator } from '@playwright/test';
-import { INSURANCE_OPTIONS } from '../consts/insurance-options';
+import { INSURANCE_TYPE } from '../consts/insurance_types';
 import { InsuranceOptions } from '../types/insuranceOptions';
 import { formatDate } from '../utils/date';
+import { DURATION } from '../consts/durations';
 
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly betaalgegevensBtn: Locator;
-  readonly chooseOwnedAmountInput: Locator;
+  readonly chooseOwnAmountInput: Locator;
   readonly dobInput: Locator;
   readonly gaVerderBtn: Locator;
   readonly gezondheidsvragenBtn: Locator;
@@ -16,6 +17,8 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly persoonsgegevensBtn: Locator;
   readonly selecteerDienstenverzekeringBtn: Locator;
   readonly selecteerGeldverzekeringBtn: Locator;
+  readonly tot65JaarRadio: Locator;
+  readonly totOverlijdenRadio: Locator;
   readonly verzekeringSamenstellenBtn: Locator;
 
   constructor(page: Page) {
@@ -23,7 +26,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
 
     // Locators
     this.betaalgegevensBtn = this.page.getByRole('button', { name: /Betaalgegevens/i });
-    this.chooseOwnedAmountInput = this.page.getByRole('textbox', { name: /Kies zelf een bedrag/i });
+    this.chooseOwnAmountInput = this.page.getByRole('textbox', { name: /Kies zelf een bedrag/i });
     this.dobInput = this.page.getByRole('textbox', { name: 'Geboortedatum' });
     this.gaVerderBtn = this.page.getByRole('button', { name: /Ga verder/i });
     this.gezondheidsvragenBtn = this.page.getByRole('button', { name: /Gezondheidsvragen/i });
@@ -37,6 +40,8 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     this.selecteerGeldverzekeringBtn = this.page.getByRole('button', {
       name: /Selecteer geldverzekering en ga verder/i,
     });
+    this.tot65JaarRadio = this.page.getByRole('radio', { name: /Betaal tot 65 jaar/i });
+    this.totOverlijdenRadio = this.page.getByRole('radio', { name: /Betaal tot aan je overlijden/i });
     this.verzekeringSamenstellenBtn = this.page.getByRole('button', { name: /Verzekering samenstellen/i });
   }
 
@@ -49,38 +54,25 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   }
 
   /**
-   * Enter the date of birth and click the 'Ga verder' button.
+   * Enter the date of birth.
    * @param geboortedatum The Date of birth to enter.
    */
-  async enterGeboortedatumAndContinue(geboortedatum: Date) {
+  async enterGeboortedatum(geboortedatum: Date) {
     const formattedDate = formatDate(geboortedatum);
     await this.dobInput.fill(formattedDate);
+  }
+
+  async continueToNextStep() {
     await this.gaVerderBtn.click();
-  }
-
-  async openVerzekeringSamenstellen() {
-    await this.verzekeringSamenstellenBtn.click();
-  }
-
-  async openPersoonsgegevens() {
-    await this.persoonsgegevensBtn.click();
-  }
-
-  async openGezondheidsvragen() {
-    await this.gezondheidsvragenBtn.click();
-  }
-
-  async openBetaalgegevens() {
-    await this.betaalgegevensBtn.click();
   }
 
   async selectInsuranceOption(option: InsuranceOptions['insuranceOptions']['insuranceType']) {
     await this.insuranceRadioGroup.waitFor({ state: 'visible' });
     switch (option) {
-      case INSURANCE_OPTIONS.SERVICE:
+      case INSURANCE_TYPE.SERVICE:
         await this.selecteerDienstenverzekeringBtn.click();
         break;
-      case INSURANCE_OPTIONS.MONEY:
+      case INSURANCE_TYPE.MONEY:
         await this.selecteerGeldverzekeringBtn.click();
         break;
       default:
@@ -89,15 +81,32 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   }
 
   async selectAmountOrAdditionalAmount(scenario: InsuranceOptions) {
-    if (scenario.insuranceOptions.insuredAmount) {
-      const insuredAmountInput = this.page.getByRole('textbox', {
-        name: /Invoerveld voor Kies zelf een bedrag/i,
-      });
-      await insuredAmountInput.fill(scenario.insuranceOptions.insuredAmount.toString());
+    const { insuredAmount, additionalAmount } = scenario.insuranceOptions;
+
+    if (insuredAmount && additionalAmount) {
+      throw new Error(
+        `Cannot select both insuredAmount (${insuredAmount}) and additionalAmount (${additionalAmount}). ` +
+          'Please provide only one.',
+      );
     }
 
-    if (scenario.insuranceOptions.additionalAmount) {
-      await this.chooseOwnedAmountInput.fill(scenario.insuranceOptions.additionalAmount.toString());
+    if (!insuredAmount && !additionalAmount) {
+      throw new Error('Either insuredAmount or additionalAmount must be provided');
+    }
+
+    const amountToFill = insuredAmount || additionalAmount;
+    await this.chooseOwnAmountInput.fill(amountToFill!.toString());
+  }
+
+  async selectDuration(duration: InsuranceOptions['insuranceOptions']['duration']) {
+    switch (duration) {
+      case DURATION.UNTIL_AGE_65:
+        await this.tot65JaarRadio.click();
+        break;
+      case DURATION.UNTIL_DEATH:
+        await this.totOverlijdenRadio.click();
+      default:
+        break;
     }
   }
 }
