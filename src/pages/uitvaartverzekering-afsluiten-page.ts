@@ -2,6 +2,7 @@ import { BasePage } from './base-page';
 import { Page, Locator } from '@playwright/test';
 import { INSURANCE_OPTIONS } from '../consts/insurance-options';
 import { InsuranceOptions } from '../types/insuranceOptions';
+import { formatDate } from '../utils/date';
 
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly betaalgegevensBtn: Locator;
@@ -52,11 +53,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
    * @param geboortedatum The Date of birth to enter.
    */
   async enterGeboortedatumAndContinue(geboortedatum: Date) {
-    const formattedDate = geboortedatum.toLocaleDateString('nl-NL', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+    const formattedDate = formatDate(geboortedatum);
     await this.dobInput.fill(formattedDate);
     await this.gaVerderBtn.click();
   }
