@@ -1,6 +1,7 @@
 {
   "scripts": {
     "allure": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "allure-clean": "rm -fR allure-results && rm -fR allure-report",
     "format": "prettier --write .",
     "pw": "playwright test",
     "pw-allure": "playwright test && allure generate allure-results --clean -o allure-report && allure open allure-report",
