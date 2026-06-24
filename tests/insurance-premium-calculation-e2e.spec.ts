@@ -10,7 +10,7 @@ test.describe('DELA uitvaartverzekering', () => {
     const { dateOfBirth, gender, initials, lastName } = scenario;
     const { zipCode, houseNumber } = scenario.addressDetails;
     const { telephoneNumber, emailAddress } = scenario.contactDetails;
-    const { duration, insuranceType, paymentFrequency } = scenario.insuranceOptions;
+    const { duration, insuranceType, paymentFrequency, startDate } = scenario.insuranceOptions;
 
     test.describe(`adult ${scenario.firstName} ${scenario.lastName} choosing ${insuranceType}`, () => {
       test('should perform a premium calculation', async ({ uitvaartverzekeringAfsluitenPage }) => {
@@ -51,12 +51,23 @@ test.describe('DELA uitvaartverzekering', () => {
         });
 
         await allure.step('Step 3- Gezondheisvragen', async () => {
-          await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
-            name: 'insurance-premium-calculation-step3-health-questions.aria.yml',
+          await allure.step(`Verify health questions for ${initials} ${lastName}`, async () => {
+            await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
+              name: 'insurance-premium-calculation-step3-health-questions.aria.yml',
+            });
+          });
+
+          await allure.step(`Select "Nee, geen van bovenstaande" for health questions and continue`, async () => {
+            await uitvaartverzekeringAfsluitenPage.selectNoneOfTheAboveForHealthQuestions();
+            await uitvaartverzekeringAfsluitenPage.confirmChoice();
           });
         });
 
-        await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
+        await allure.step('Step 4 - Betaalgegevens', async () => {
+          await allure.step(`Verify start date is ${formatDate(startDate)}`, async () => {
+            await expect(uitvaartverzekeringAfsluitenPage.ingangsdatumInput).toHaveValue(formatDate(startDate));
+          });
+        });
       });
     });
   }

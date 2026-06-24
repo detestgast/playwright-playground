@@ -13,11 +13,14 @@ import { BasePage } from './base-page';
 export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly achternaamInput = this.page.getByRole('textbox', { name: 'Achternaam (geboortenaam)' });
   readonly betaalgegevensBtn = this.page.getByRole('button', { name: /Betaalgegevens/i });
+  readonly bevestigKeuzeBtn = this.page.getByRole('button', { name: /Bevestig keuze/i });
   readonly emailInput = this.page.getByRole('textbox', { name: 'E-mailadres' });
   readonly gaVerderBtn = this.page.getByRole('button', { name: /Ga verder/i });
   readonly geboortedatumInput = this.page.getByRole('textbox', { name: 'Geboortedatum' });
+  readonly geenVanBovenstaandeRadio = this.page.getByRole('radio', { name: /Nee, geen van bovenstaande/i });
   readonly gezondheidsvragenBtn = this.page.getByRole('button', { name: /Gezondheidsvragen/i });
   readonly huisnummerInput = this.page.getByRole('textbox', { name: 'Huisnummer' });
+  readonly ingangsdatumInput = this.page.getByRole('textbox', { name: 'Ingangsdatum' });
   readonly insuranceRadioGroup = this.page.getByRole('radiogroup');
   readonly insuranceRadioOptions = this.insuranceRadioGroup.getByRole('radio'); // must follow insuranceRadioGroup
   readonly kiesZelfBedragInput = this.page.getByRole('textbox', { name: /Kies zelf een bedrag/i });
@@ -66,6 +69,11 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   async continueToNextStep() {
     await this.gaVerderBtn.scrollIntoViewIfNeeded();
     await this.gaVerderBtn.click();
+  }
+
+  async confirmChoice() {
+    await this.bevestigKeuzeBtn.scrollIntoViewIfNeeded();
+    await this.bevestigKeuzeBtn.click();
   }
 
   async selectInsuranceOption(option: InsuranceOptions['insuranceOptions']['insuranceType']) {
@@ -139,5 +147,10 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await this.telefoonnummerInput.fill(telephoneNumber);
     await this.emailInput.fill(emailAddress);
     await this.emailInput.press('Tab');
+  }
+
+  async selectNoneOfTheAboveForHealthQuestions() {
+    await this.geenVanBovenstaandeRadio.scrollIntoViewIfNeeded();
+    await this.geenVanBovenstaandeRadio.click();
   }
 }
