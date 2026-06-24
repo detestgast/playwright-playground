@@ -48,34 +48,32 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   readonly voorlettersInput = this.page.getByRole('textbox', { name: 'Voorletters' });
   readonly voornaamInput = this.page.getByRole('textbox', { name: 'Voornaam' });
 
-  /**
-   * Navigate to the insurance premium calculation start page and accept cookies if the banner is visible.
-   */
+  /** Navigate to the insurance premium calculation start page and accept cookies if the banner is visible. */
   async visit() {
     await this.navigate('/verzekeringen/uitvaartverzekering/uitvaartverzekering-afsluiten');
     await this.acceptAllCookiesIfVisible();
   }
 
-  /**
-   * Enter the date of birth.
-   * @param dateOfBirth The Date of birth to enter.
-   */
+  /** Enter the date of birth. */
   async enterGeboortedatum(dateOfBirth: Person['dateOfBirth']) {
     const formattedDate = formatDate(dateOfBirth);
     await this.geboortedatumInput.fill(formattedDate);
     await this.geboortedatumInput.press('Tab');
   }
 
+  /** Scrolls to and clicks the 'Ga verder' button to advance to the next step. */
   async continueToNextStep() {
     await this.gaVerderBtn.scrollIntoViewIfNeeded();
     await this.gaVerderBtn.click();
   }
 
+  /** Scrolls to and clicks the 'Bevestig keuze' button to confirm the current selection. */
   async confirmChoice() {
     await this.bevestigKeuzeBtn.scrollIntoViewIfNeeded();
     await this.bevestigKeuzeBtn.click();
   }
 
+  /** Selects the insurance type (in-kind or money) and clicks the corresponding proceed button. */
   async selectInsuranceOption(option: InsuranceOptions['insuranceOptions']['insuranceType']) {
     await this.insuranceRadioGroup.waitFor({ state: 'visible' });
     const buttons: Record<typeof option, Locator> = {
@@ -85,6 +83,10 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await buttons[option].click();
   }
 
+  /**
+   * Fills in either the insured amount or the additional amount.
+   * Throws if both or neither are provided in the scenario.
+   */
   async selectAmountOrAdditionalAmount(scenario: InsuranceOptions) {
     const { insuredAmount, additionalAmount } = scenario.insuranceOptions;
     if (insuredAmount && additionalAmount)
@@ -97,6 +99,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await this.kiesZelfBedragInput.press('Tab');
   }
 
+  /** Selects the payment duration radio button (until age 65 or until death). */
   async selectDuration(duration: InsuranceOptions['insuranceOptions']['duration']) {
     const radios: Record<typeof duration, Locator> = {
       [DURATION.UNTIL_AGE_65]: this.tot65JaarRadio,
@@ -105,6 +108,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await radios[duration].click();
   }
 
+  /** Selects the payment frequency radio button (monthly, quarterly, half-yearly, or yearly). */
   async selectPaymentFrequency(paymentFrequency: InsuranceOptions['insuranceOptions']['paymentFrequency']) {
     const radios: Record<typeof paymentFrequency, Locator> = {
       [PAYMENT_FREQUENCY.PER_MONTH]: this.perMaandRadio,
@@ -115,12 +119,14 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await radios[paymentFrequency].click();
   }
 
+  /** Selects the gender radio button (Meneer / Mevrouw). */
   async selectGender(gender: Person['gender']) {
     const radio = gender === 'male' ? this.meneerRadio : this.mevrouwRadio;
     await radio.scrollIntoViewIfNeeded();
     await radio.click();
   }
 
+  /** Fills in first name, initials, optional prefix, and last name. */
   async enterNameDetails(person: Person) {
     const { firstName, initials, lastName, prefix } = person;
     await this.voornaamInput.scrollIntoViewIfNeeded();
@@ -131,6 +137,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await this.achternaamInput.press('Tab');
   }
 
+  /** Fills in postcode, house number, and optional addition, then waits for the address lookup response. */
   async enterAddressDetails(addressDetails: AddressDetails['addressDetails']) {
     const { zipCode, houseNumber, addition } = addressDetails;
     await this.postcodeInput.scrollIntoViewIfNeeded();
@@ -141,6 +148,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await waitForAddressLookupResponse(this.page);
   }
 
+  /** Fills in telephone number and email address. */
   async enterContactDetails(contactDetails: ContactDetails['contactDetails']) {
     const { telephoneNumber, emailAddress } = contactDetails;
     await this.telefoonnummerInput.scrollIntoViewIfNeeded();
@@ -149,6 +157,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
     await this.emailInput.press('Tab');
   }
 
+  /** Selects 'Geen van bovenstaande' for the health questionnaire. */
   async selectNoneOfTheAboveForHealthQuestions() {
     await this.geenVanBovenstaandeRadio.scrollIntoViewIfNeeded();
     await this.geenVanBovenstaandeRadio.click();
