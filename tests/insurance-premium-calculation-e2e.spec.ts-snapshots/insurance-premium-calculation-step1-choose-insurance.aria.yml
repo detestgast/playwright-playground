@@ -6,7 +6,7 @@
   - paragraph: Geboortedatum
   - paragraph: /\d+-\d+-\d+/
   - button "Wijzig"
-  - heading "Selecteer uitvaartverzekering" [level=2]
+  - heading "Kies je uitvaartverzekering" [level=2]
   - radiogroup:
     - radio /Meest gekozen Natura Dienstenverzekering Volledig ontzorgd € \d+, \d+ \/maand Premie bij totale waarde van € \d+\.\d+ Meer informatie over de premieberekening van de dienstenverzekering Complete uitvaart, volledig ontzorgd DELA-uitvaartverzorger DELA-crematorium of begraafplaats in jouw buurt Geldbedrag voor extra wensen Selecteer dienstenverzekering en ga verder naar stap 3 Wat is verzekerd\?/:
       - text: Meest gekozen
@@ -72,18 +72,18 @@
   - heading "Belangrijke informatie" [level=2]
   - paragraph:
     - link "Algemene voorwaarden":
-      - /url: /.*\.pdf$/
+      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup/d216_w0625_rgb_algemene-voorwaarden-dela-dup.pdf
   - paragraph:
     - button "Hoeveel moet ik verzekeren"
   - paragraph:
     - link "Brochure":
-      - /url: /.*\.pdf$/
+      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup-2026/d351_w1225_brochure_dup_direct_rgb.pdf
   - paragraph:
     - link "Productleeswijzer":
       - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup/d220-w0426-rgb-productleeswijzer-dup-model-4-1
   - paragraph:
     - link "Vergelijkingskaart":
-      - /url: /.*\.pdf$/
+      - /url: /-/media/project/delanl/pdf-files/verzekeringen/dup-2026/i667_w1225_vergelijkingskaart_risicos_afdekken.pdf
   - paragraph:
     - link "Verzekeringskaart diensten":
       - /url: https://verzekeringskaarten.nl/dela/uitvaartverzekering
