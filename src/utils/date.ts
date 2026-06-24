@@ -12,3 +12,16 @@ export function formatDate(value: Date | string | number): string {
 
   return `${day}-${month}-${year}`;
 }
+
+/**
+ * Converts a Date object to a string in the format "YYYY-MM-DD" for API usage.
+ * @param date - The Date object to convert.
+ * @returns A string representing the date in "YYYY-MM-DD" format.
+ */
+export function apiDate(date: Date): string {
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
