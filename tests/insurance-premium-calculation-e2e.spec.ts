@@ -17,17 +17,11 @@ test.describe('DELA uitvaartverzekering', () => {
         await allure.step('Step 1 - Verzekering samenstellen', async () => {
           await allure.step('Visit insurance premium calculation page', async () => {
             await uitvaartverzekeringAfsluitenPage.visit();
-            // await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
-            //   name: 'insurance-premium-calculation-step1-start.aria.yml',
-            // });
           });
 
           await allure.step(`Enter date of birth ${formatDate(dateOfBirth)} and continue`, async () => {
             await uitvaartverzekeringAfsluitenPage.enterGeboortedatum(dateOfBirth);
             await uitvaartverzekeringAfsluitenPage.continueToNextStep();
-            // await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
-            //   name: 'insurance-premium-calculation-step1-choose-insurance.aria.yml',
-            // });
           });
 
           await allure.step(`Choose ${insuranceType} (${duration}, ${paymentFrequency})`, async () => {
@@ -57,8 +51,12 @@ test.describe('DELA uitvaartverzekering', () => {
         });
 
         await allure.step('Step 3- Gezondheisvragen', async () => {
-          await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
+          await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
+            name: 'insurance-premium-calculation-step3-health-questions.aria.yml',
+          });
         });
+
+        await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
       });
     });
   }

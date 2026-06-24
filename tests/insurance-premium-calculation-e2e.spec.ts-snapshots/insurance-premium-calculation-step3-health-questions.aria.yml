@@ -1,0 +1,74 @@
+- main:
+  - button "Stap 1 Verzekering Samenstellen": Verzekering samenstellen
+  - button "Stap 2 Persoonsgegevens"
+  - button "Stap 3 Gezondheidsvragen"
+  - button "Stap 4 Betaalgegevens" [disabled]
+  - alert: Je bent er bijna! Nog maar 2 stappen om de aanvraag compleet te maken.
+  - heading "Gezondheidsvragen" [level=1]
+  - paragraph: Voor elke persoon die je wilt verzekeren, schatten wij het overlijdensrisico in aan de hand van gezondheidsvragen. Bij extra risico’s bepalen we of je verzekerd kunt worden, en zo ja, tegen welke voorwaarden. Zo blijven onze premies eerlijk en zo laag mogelijk.
+  - paragraph: Vul alle vragen juist en volledig in
+  - paragraph:
+    - text: Noem alle ziektes, aandoeningen of klachten. Ook als je denkt dat ze niet belangrijk zijn of je nog niet bij een dokter bent geweest. Doe je dit niet? Dan kunnen we de verzekering tussendoor beëindigen of bij overlijden niet uitkeren. Lees meer over
+    - link "rechten en plichten":
+      - /url: /verzekeringen/medische-acceptatie
+    - text: .
+  - paragraph: Bekijk hieronder de uitklapvelden.
+  - button "Lees hier meer over de medische acceptatie en de regeling voor als je genezen bent van kanker."
+  - heading /.*/ [level=2]
+  - paragraph: /\(\d+-\d+-\d+\)/
+  - list:
+    - listitem: /Heeft .* één of meer van onderstaande ziektes, aandoeningen of klachten?/
+    - listitem: /Is .* hiervoor onder controle bij een \(huis\)arts, of is hiervoor een afspraak gemaakt?/
+    - listitem: /Gebruikt .* medicijnen op recept voor een van onderstaande aandoeningen?/
+    - listitem: /Zit .* op dit moment in een medisch onderzoekstraject?/
+    - listitem: /Is .* op dit moment opgenomen in een zorginstelling?/
+    - listitem: /Staat .* op een wachtlijst voor opname?/
+  - heading "Hart-, vaat-, hersen- en of zenuwziekten" [level=3]:
+    - button "Hart-, vaat-, hersen- en of zenuwziekten"
+  - heading "Kwaadaardige aandoening(en)" [level=3]:
+    - button "Kwaadaardige aandoening(en)"
+  - heading "Een aandoening aan inwendige organen, infectieziekten of spierziekten" [level=3]:
+    - button "Een aandoening aan inwendige organen, infectieziekten of spierziekten"
+  - heading "Psychische aandoening(en) / verslavingen" [level=3]:
+    - button "Psychische aandoening(en) / verslavingen"
+  - heading "Suikerziekte / Diabetes mellitus, HIV of aids" [level=3]:
+    - button "Suikerziekte / Diabetes mellitus, HIV of aids"
+  - heading "Onderzoek en opname" [level=3]:
+    - button "Onderzoek en opname"
+  - paragraph: Kun je één of meer vragen met ‘ja’ beantwoorden? Kies ‘ja’. Je ontvangt van ons een aanvullende vragenlijst om te kijken of er risico’s zijn en tegen welke voorwaarden je verzekerd kunt worden. Kun je alle vragen met ‘nee’ beantwoorden? Kies dan ‘nee’.
+  - radiogroup "Kun je één of meer vragen met ‘ja’ beantwoorden? Kies ‘ja’. Je ontvangt van ons een aanvullende vragenlijst om te kijken of er risico’s zijn en tegen welke voorwaarden je verzekerd kunt worden. Kun je alle vragen met ‘nee’ beantwoorden? Kies dan ‘nee’.":
+    - radio "Ja"
+    - text: Ja
+    - radio "Nee, geen van bovenstaande"
+    - text: Nee, geen van bovenstaande
+  - button "Bevestig keuze"
+  - heading "Jouw uitvaartverzekering" [level=2]
+  - heading /Geldverzekering|Dienstenverzekering/ [level=3]
+  - paragraph: Totale waarde
+  - paragraph: /€ \d+\.\d+/
+  - heading "Kosten" [level=2]
+  - heading "Premie per persoon" [level=3]
+  - paragraph: /.*/
+  - paragraph: /\d+-\d+-\d+/
+  - paragraph: /€ \d+,\d+/
+  - heading /Premie per maand|Premie per jaar|Premie per kwartaal|Premie per halfjaar/ [level=2]
+  - paragraph: €
+  - paragraph: /\d+,/
+  - paragraph: /\d+/
+  - separator
+  - heading "Afsluitkosten" [level=2]
+  - button "Meer informatie over de distributiekosten"
+  - paragraph: Distributiekosten
+  - paragraph: /€ \d+,\d+/
+  - button "Meer informatie over de poliskosten"
+  - paragraph: Poliskosten
+  - paragraph: /€ \d+,\d+/
+  - link "Keurmerk Uitvaartzorg":
+    - /url: /verzekeringen/keurmerken/keurmerk-uitvaartzorg
+  - link "Keurmerk Privacy Waarborg":
+    - /url: /verzekeringen/keurmerken/keurmerk-privacy-waarborg
+    - img "Keurmerk Uitvaartzorg"
+  - link "GreenLeave":
+    - /url: /uitvaart/voor-de-uitvaart/duurzame-uitvaart/kernprincipes
+    - img "GreenLeave"
+  - paragraph: /Kosteloos annuleren binnen \d+ dagen/
