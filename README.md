@@ -2,7 +2,7 @@
 
 A test automation project built with [Playwright](https://playwright.dev/) and TypeScript, targeting the DELA funeral insurance application. It demonstrates a maintainable, accessible, and strongly-typed approach to both end-to-end and API testing.
 
----
+<img width="2672" height="1237" alt="playwright-ui" src="https://github.com/user-attachments/assets/ec41e28b-2f7e-4d2d-ab9e-c889ad560c33" />
 
 ## Technology Stack
 
@@ -48,6 +48,8 @@ Alongside E2E tests, the project includes API-level premium calculation tests. B
 ### Reporting
 
 Allure is integrated as a reporter. Tests are structured with named `allure.step` calls that map to user-facing actions, making reports readable by non-technical stakeholders. Playwright traces are attached to each test result for post-mortem debugging.
+
+<img width="1737" height="1366" alt="allure-report" src="https://github.com/user-attachments/assets/2a0b8867-0d93-4129-8686-b592b1dc852f" />
 
 ## Project Structure
 
