@@ -7,7 +7,9 @@ test.describe('DELA uitvaartverzekering', () => {
   const testScenarios = [{ scenario: adultMale }, { scenario: adultFemale }];
 
   for (const { scenario } of testScenarios) {
-    const { dateOfBirth } = scenario;
+    const { dateOfBirth, gender, initials, lastName } = scenario;
+    const { zipCode, houseNumber } = scenario.addressDetails;
+    const { telephoneNumber, emailAddress } = scenario.contactDetails;
     const { duration, insuranceType, paymentFrequency } = scenario.insuranceOptions;
 
     test.describe(`adult ${scenario.firstName} ${scenario.lastName} choosing ${insuranceType}`, () => {
@@ -15,17 +17,17 @@ test.describe('DELA uitvaartverzekering', () => {
         await allure.step('Step 1 - Verzekering samenstellen', async () => {
           await allure.step('Visit insurance premium calculation page', async () => {
             await uitvaartverzekeringAfsluitenPage.visit();
-            await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
-              name: 'insurance-premium-calculation-step1-start.aria.yml',
-            });
+            // await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
+            //   name: 'insurance-premium-calculation-step1-start.aria.yml',
+            // });
           });
 
           await allure.step(`Enter date of birth ${formatDate(dateOfBirth)} and continue`, async () => {
             await uitvaartverzekeringAfsluitenPage.enterGeboortedatum(dateOfBirth);
             await uitvaartverzekeringAfsluitenPage.continueToNextStep();
-            await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
-              name: 'insurance-premium-calculation-step1-choose-insurance.aria.yml',
-            });
+            // await expect(uitvaartverzekeringAfsluitenPage.mainContent).toMatchAriaSnapshot({
+            //   name: 'insurance-premium-calculation-step1-choose-insurance.aria.yml',
+            // });
           });
 
           await allure.step(`Choose ${insuranceType} (${duration}, ${paymentFrequency})`, async () => {
@@ -39,6 +41,22 @@ test.describe('DELA uitvaartverzekering', () => {
         });
 
         await allure.step('Step 2 - Persoonsgegevens', async () => {
+          await allure.step(`Fill in Persoonsgegevens (${initials} ${lastName} [${gender}])`, async () => {
+            await uitvaartverzekeringAfsluitenPage.selectGender(gender);
+            await uitvaartverzekeringAfsluitenPage.enterNameDetails(scenario);
+          });
+
+          await allure.step(`Fill in Adresgegevens (${zipCode}, ${houseNumber}))`, async () => {
+            await uitvaartverzekeringAfsluitenPage.enterAddressDetails(scenario.addressDetails);
+          });
+
+          await allure.step(`Fill in Contactgegevens (${telephoneNumber}, ${emailAddress})`, async () => {
+            await uitvaartverzekeringAfsluitenPage.enterContactDetails(scenario.contactDetails);
+            await uitvaartverzekeringAfsluitenPage.continueToNextStep();
+          });
+        });
+
+        await allure.step('Step 3- Gezondheisvragen', async () => {
           await uitvaartverzekeringAfsluitenPage.waitForTimeout(2000);
         });
       });

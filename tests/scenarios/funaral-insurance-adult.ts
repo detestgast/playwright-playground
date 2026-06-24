@@ -13,12 +13,11 @@ export const adultMale = {
   dateOfBirth: new Date('1976-11-16'),
   gender: 'male',
   addressDetails: {
-    zipCode: '1234 AB',
-    houseNumber: '56',
-    addition: 'A',
+    zipCode: '5611 DD',
+    houseNumber: '1',
   },
   contactDetails: {
-    telephoneNumber: '0612345678',
+    telephoneNumber: '0402601636',
     emailAddress: 'jan.zwart@example.com',
   },
   insuranceOptions: {
@@ -37,12 +36,11 @@ export const adultFemale = {
   dateOfBirth: new Date('1988-09-13'),
   gender: 'female',
   addressDetails: {
-    zipCode: '5678 CD',
-    houseNumber: '12',
-    addition: 'B',
+    zipCode: '5611 DD',
+    houseNumber: '1',
   },
   contactDetails: {
-    telephoneNumber: '0612345679',
+    telephoneNumber: '0402601636',
     emailAddress: 'anna.jansen@example.com',
   },
   insuranceOptions: {
