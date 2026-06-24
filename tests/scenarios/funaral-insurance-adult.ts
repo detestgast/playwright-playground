@@ -10,6 +10,7 @@ export const adultMale = {
   dateOfBirth: new Date('1976-11-16'),
   gender: 'male',
   insuranceOptions: {
+    startDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
     insuranceType: INSURANCE_TYPE.MONEY,
     insuredAmount: 15000,
     duration: DURATION.UNTIL_AGE_65,
@@ -23,7 +24,8 @@ export const adultFemale = {
   dateOfBirth: new Date('1988-09-13'),
   gender: 'female',
   insuranceOptions: {
-    insuranceType: INSURANCE_TYPE.SERVICE,
+    startDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    insuranceType: INSURANCE_TYPE.INKIND,
     additionalAmount: 2000,
     duration: DURATION.UNTIL_DEATH,
     paymentFrequency: PAYMENT_FREQUENCY.PER_YEAR,

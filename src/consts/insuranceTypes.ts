@@ -1,4 +1,4 @@
 export const INSURANCE_TYPE = {
-  SERVICE: 'dienstenverzekering',
+  INKIND: 'dienstenverzekering',
   MONEY: 'geldverzekering',
 } as const;

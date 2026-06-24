@@ -78,7 +78,7 @@ export class UitvaartverzekeringAfsluitenPage extends BasePage {
   async selectInsuranceOption(option: InsuranceOptions['insuranceOptions']['insuranceType']) {
     await this.insuranceRadioGroup.waitFor({ state: 'visible' });
     switch (option) {
-      case INSURANCE_TYPE.SERVICE:
+      case INSURANCE_TYPE.INKIND:
         await this.selecteerDienstenverzekeringBtn.click();
         break;
       case INSURANCE_TYPE.MONEY:

@@ -8,6 +8,7 @@ type PaymentFrequencyType = (typeof PAYMENT_FREQUENCY)[keyof typeof PAYMENT_FREQ
 
 export type InsuranceOptions = {
   insuranceOptions: {
+    startDate: Date;
     insuranceType: InsuranceType;
     insuredAmount?: number;
     additionalAmount?: number;
