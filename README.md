@@ -12,6 +12,7 @@ A test automation project built with [Playwright](https://playwright.dev/) and T
 | [TypeScript](https://www.typescriptlang.org/) | Static typing across all test and support code                   |
 | [Allure](https://allurereport.org/)           | Rich test reporting with step-level detail and trace attachments |
 | [Prettier](https://prettier.io/)              | Consistent code formatting                                       |
+| [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) | Automated WCAG 2.1 A/AA accessibility audits |
 
 ---
 
@@ -40,6 +41,10 @@ Domain concepts — insurance types, durations, payment frequencies, person data
 ### Data-Driven Tests
 
 Test scenarios are defined as typed data objects and iterated over in `test.describe` loops. Adding a new scenario requires no changes to test logic — only a new data entry.
+
+### WCAG Accessibility
+
+Automated accessibility audits are integrated directly into the test suite using @axe-core/playwright. Axe runs against the full rendered DOM and asserts that no violations are found for WCAG 2.2 Level A and AA success criteria. The axe runner is provided as a custom fixture.
 
 ### API Testing
 
